@@ -150,7 +150,8 @@ int main()
     return 0;
 }
 # Output:
-![Uploading image.png…]()
+<img width="645" height="450" alt="image" src="https://github.com/user-attachments/assets/3db73cfd-f117-4732-aa07-4ab93b82ceb1" />
+
 
 
 # Result: 
