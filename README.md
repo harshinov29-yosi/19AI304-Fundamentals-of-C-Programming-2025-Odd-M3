@@ -28,7 +28,47 @@ To formulate a C program to convert a decimal number into its binary equivalent 
 ### Step 8: 
    Stop
 # Program:
+#include <stdio.h>
+
+int main()
+{
+    int decimal, binary[32];
+    int i = 0, j;
+
+    // Input decimal number
+    printf("Enter a decimal number: ");
+    scanf("%d", &decimal);
+
+    // Special case for 0
+    if (decimal == 0)
+    {
+        printf("Binary equivalent: 0\n");
+        return 0;
+    }
+
+    // Convert decimal to binary
+    while (decimal > 0)
+    {
+        binary[i] = decimal % 2;
+        decimal = decimal / 2;
+        i++;
+    }
+
+    // Display binary number (in reverse order)
+    printf("Binary equivalent: ");
+    for (j = i - 1; j >= 0; j--)
+    {
+        printf("%d", binary[j]);
+    }
+
+    printf("\n");
+
+    return 0;
+}
+
 # Output:
+Enter a decimal number: 7.5
+Binary equivalent: 111
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -67,7 +107,83 @@ Thus, the program was implemented and executed successfully, and the required ou
 ### Step 9: 
   Stop
 # Program:
+#include <stdio.h>
+
+int main()
+{
+    int rows, cols;
+    int i, j, k;
+    int matrix[10][10];
+    int found = 0;
+
+    // Input matrix size
+    printf("Enter number of rows and columns: ");
+    scanf("%d %d", &rows, &cols);
+
+    // Input matrix elements
+    printf("Enter matrix elements:\n");
+    for (i = 0; i < rows; i++)
+    {
+        for (j = 0; j < cols; j++)
+        {
+            scanf("%d", &matrix[i][j]);
+        }
+    }
+
+    // Find saddle point
+    for (i = 0; i < rows; i++)
+    {
+        // Find minimum element in row i
+        int min = matrix[i][0];
+        int colIndex = 0;
+
+        for (j = 1; j < cols; j++)
+        {
+            if (matrix[i][j] < min)
+            {
+                min = matrix[i][j];
+                colIndex = j;
+            }
+        }
+
+        // Check if this minimum is maximum in its column
+        int isSaddle = 1;
+        for (k = 0; k < rows; k++)
+        {
+            if (matrix[k][colIndex] > min)
+            {
+                isSaddle = 0;
+                break;
+            }
+        }
+
+        // If saddle point found
+        if (isSaddle)
+        {
+            printf("Saddle point found at position (%d, %d)\n", i, colIndex);
+            printf("Saddle point value: %d\n", min);
+            found = 1;
+        }
+    }
+
+    // If no saddle point exists
+    if (!found)
+    {
+        printf("No saddle point found in the matrix.\n");
+    }
+
+    return 0;
+}
+
 # Output:
+Enter number of rows and columns: 3 3
+Enter matrix elements:
+1 2 3
+4 5 6
+7 8 9
+
+Saddle point found at position (2, 0)
+Saddle point value: 7
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -101,7 +217,39 @@ Thus, the program was implemented and executed successfully, and the required ou
 ### Step 10: 
   Stop
 # Program:
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+    char str[100];
+    int i, length;
+
+    // Input string
+    printf("Enter a string: ");
+    fgets(str, sizeof(str), stdin);
+
+    // Remove newline character if present
+    str[strcspn(str, "\n")] = '\0';
+
+    // Find length of string
+    length = strlen(str);
+
+    // Reverse the string
+    printf("Reversed string: ");
+    for (i = length - 1; i >= 0; i--)
+    {
+        printf("%c", str[i]);
+    }
+
+    printf("\n");
+
+    return 0;
+}
+
 # Output:
+Enter a string: Saveetha Engineering College 
+Reversed string:  egelloC gnireenignE ahteevaS
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -135,7 +283,52 @@ Thus, the program was implemented and executed successfully, and the required ou
 ### Step 8:
   Stop
 # Program:
+#include <stdio.h>
+
+int main()
+{
+    char str[200];
+    int freq[256] = {0};   // ASCII characters
+    int i;
+
+    // Input string
+    printf("Enter a string: ");
+    fgets(str, sizeof(str), stdin);
+
+    // Count frequency of each character
+    for (i = 0; str[i] != '\0'; i++)
+    {
+        freq[(unsigned char)str[i]]++;
+    }
+
+    // Display character frequencies
+    printf("\nCharacter Frequency:\n");
+    for (i = 0; i < 256; i++)
+    {
+        if (freq[i] > 0 && i != '\n')   // skip newline character
+        {
+            printf("'%c' = %d\n", i, freq[i]);
+        }
+    }
+
+    return 0;
+}
+
 # Output:
+Enter a string: Saveetha College 
+
+Character Frequency:
+' ' = 2
+'C' = 1
+'S' = 1
+'a' = 2
+'e' = 4
+'g' = 1
+'h' = 1
+'l' = 2
+'o' = 1
+'t' = 1
+'v' = 1
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -169,7 +362,66 @@ Thus, the program was implemented and executed successfully, and the required ou
 ### Step 8: 
   Stop
 # Program:
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+    char str[300];
+    char words[100][50];
+    int count = 0;
+    int i, j;
+    int isDuplicate;
+
+    // Input string
+    printf("Enter a string: ");
+    fgets(str, sizeof(str), stdin);
+
+    // Remove trailing newline if present
+    str[strcspn(str, "\n")] = '\0';
+
+    // Split string into words
+    char *token = strtok(str, " ");
+    while (token != NULL)
+    {
+        strcpy(words[count], token);
+        count++;
+        token = strtok(NULL, " ");
+    }
+
+    // Display unique words
+    printf("\nString with unique words:\n");
+
+    for (i = 0; i < count; i++)
+    {
+        isDuplicate = 0;
+
+        // Check if word appeared before
+        for (j = 0; j < i; j++)
+        {
+            if (strcmp(words[i], words[j]) == 0)
+            {
+                isDuplicate = 1;
+                break;
+            }
+        }
+
+        if (!isDuplicate)
+        {
+            printf("%s ", words[i]);
+        }
+    }
+
+    printf("\n");
+
+    return 0;
+}
+
 # Output:
+Enter a string: That is not what is that is not 
+
+String with unique words:
+That is not what that 
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
