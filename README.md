@@ -94,71 +94,63 @@ Thus, the program was implemented and executed successfully, and the required ou
 
 int main()
 {
-    int rows, cols;
+    int n;
+    int a[10][10];
     int i, j, k;
-    int matrix[10][10];
-    int found = 0;
+    int min, colIndex;
+    int saddleRow = -1, saddleCol = -1, saddleValue;
 
-    // Input matrix size
-    printf("Enter number of rows and columns: ");
-    scanf("%d %d", &rows, &cols);
+    scanf("%d", &n);
 
-    // Input matrix elements
-    printf("Enter matrix elements:\n");
-    for (i = 0; i < rows; i++)
+    for (i = 0; i < n; i++)
+        for (j = 0; j < n; j++)
+            scanf("%d", &a[i][j]);
+
+    printf("The matrix is\n");
+    for (i = 0; i < n; i++)
     {
-        for (j = 0; j < cols; j++)
-        {
-            scanf("%d", &matrix[i][j]);
-        }
+        for (j = 0; j < n; j++)
+            printf("%d ", a[i][j]);
+        printf("\n");
     }
 
-    // Find saddle point
-    for (i = 0; i < rows; i++)
+    for (i = 0; i < n; i++)
     {
-        // Find minimum element in row i
-        int min = matrix[i][0];
-        int colIndex = 0;
+        min = a[i][0];
+        colIndex = 0;
 
-        for (j = 1; j < cols; j++)
+        for (j = 1; j < n; j++)
         {
-            if (matrix[i][j] < min)
+            if (a[i][j] <= min)   // IMPORTANT FIX
             {
-                min = matrix[i][j];
+                min = a[i][j];
                 colIndex = j;
             }
         }
 
-        // Check if this minimum is maximum in its column
-        int isSaddle = 1;
-        for (k = 0; k < rows; k++)
+        for (k = 0; k < n; k++)
         {
-            if (matrix[k][colIndex] > min)
-            {
-                isSaddle = 0;
+            if (a[k][colIndex] > min)
                 break;
-            }
         }
 
-        // If saddle point found
-        if (isSaddle)
+        if (k == n)
         {
-            printf("Saddle point found at position (%d, %d)\n", i, colIndex);
-            printf("Saddle point value: %d\n", min);
-            found = 1;
+            saddleRow = i;
+            saddleCol = colIndex;
+            saddleValue = min;
         }
     }
 
-    // If no saddle point exists
-    if (!found)
-    {
-        printf("No saddle point found in the matrix.\n");
-    }
+    if (saddleRow != -1)
+        printf("\nSaddle point (%d, %d) : %d", saddleRow, saddleCol, saddleValue);
+    else
+        printf("\nNo Saddle Point");
 
     return 0;
 }
-
 # Output:
+![WhatsApp Image 2025-12-27 at 11 54 43](https://github.com/user-attachments/assets/dc9bb315-bd6b-454c-bf63-1cd2b72bd92c)
 
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
