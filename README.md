@@ -150,7 +150,8 @@ int main()
     return 0;
 }
 # Output:
-![WhatsApp Image 2025-12-27 at 11 54 43](https://github.com/user-attachments/assets/dc9bb315-bd6b-454c-bf63-1cd2b72bd92c)
+![Uploading image.png…]()
+
 
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
