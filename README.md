@@ -29,46 +29,29 @@ To formulate a C program to convert a decimal number into its binary equivalent 
    Stop
 # Program:
 #include <stdio.h>
-
+void bin(int n)
+{
+    if(n==0){
+        return;
+    } else {
+        bin(n/2);
+        printf("%d",n%2);
+    }
+}
 int main()
 {
-    int decimal, binary[32];
-    int i = 0, j;
-
-    // Input decimal number
-    printf("Enter a decimal number: ");
-    scanf("%d", &decimal);
-
-    // Special case for 0
-    if (decimal == 0)
-    {
-        printf("Binary equivalent: 0\n");
-        return 0;
-    }
-
-    // Convert decimal to binary
-    while (decimal > 0)
-    {
-        binary[i] = decimal % 2;
-        decimal = decimal / 2;
-        i++;
-    }
-
-    // Display binary number (in reverse order)
-    printf("Binary equivalent: ");
-    for (j = i - 1; j >= 0; j--)
-    {
-        printf("%d", binary[j]);
-    }
-
-    printf("\n");
-
+    int num;
+    scanf("%d",&num);
+    printf("%d in decimal = ",num);
+    bin(num);
+    printf(" in binary\n");
     return 0;
+    
 }
 
 # Output:
-Enter a decimal number: 7.5
-Binary equivalent: 111
+<img width="1183" height="358" alt="image" src="https://github.com/user-attachments/assets/5fde5304-45e5-408d-90cd-533df51374ac" />
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -176,14 +159,7 @@ int main()
 }
 
 # Output:
-Enter number of rows and columns: 3 3
-Enter matrix elements:
-1 2 3
-4 5 6
-7 8 9
 
-Saddle point found at position (2, 0)
-Saddle point value: 7
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -224,32 +200,22 @@ int main()
 {
     char str[100];
     int i, length;
-
-    // Input string
     printf("Enter a string: ");
     fgets(str, sizeof(str), stdin);
-
-    // Remove newline character if present
     str[strcspn(str, "\n")] = '\0';
-
-    // Find length of string
     length = strlen(str);
-
-    // Reverse the string
     printf("Reversed string: ");
     for (i = length - 1; i >= 0; i--)
     {
         printf("%c", str[i]);
     }
-
     printf("\n");
-
     return 0;
 }
 
 # Output:
-Enter a string: Saveetha Engineering College 
-Reversed string:  egelloC gnireenignE ahteevaS
+<img width="515" height="230" alt="image" src="https://github.com/user-attachments/assets/20e87336-d66f-41c2-af5b-f7c885676368" />
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -284,51 +250,31 @@ Thus, the program was implemented and executed successfully, and the required ou
   Stop
 # Program:
 #include <stdio.h>
-
 int main()
 {
     char str[200];
-    int freq[256] = {0};   // ASCII characters
+    int freq[256] = {0};   
     int i;
-
-    // Input string
     printf("Enter a string: ");
     fgets(str, sizeof(str), stdin);
-
-    // Count frequency of each character
     for (i = 0; str[i] != '\0'; i++)
     {
         freq[(unsigned char)str[i]]++;
     }
-
-    // Display character frequencies
     printf("\nCharacter Frequency:\n");
     for (i = 0; i < 256; i++)
     {
-        if (freq[i] > 0 && i != '\n')   // skip newline character
+        if (freq[i] > 0 && i != '\n')  
         {
             printf("'%c' = %d\n", i, freq[i]);
         }
     }
-
     return 0;
 }
 
 # Output:
-Enter a string: Saveetha College 
+<img width="505" height="538" alt="image" src="https://github.com/user-attachments/assets/aa0da656-1d26-49cc-816f-4b58f0eca777" />
 
-Character Frequency:
-' ' = 2
-'C' = 1
-'S' = 1
-'a' = 2
-'e' = 4
-'g' = 1
-'h' = 1
-'l' = 2
-'o' = 1
-'t' = 1
-'v' = 1
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -364,7 +310,6 @@ Thus, the program was implemented and executed successfully, and the required ou
 # Program:
 #include <stdio.h>
 #include <string.h>
-
 int main()
 {
     char str[300];
@@ -372,15 +317,9 @@ int main()
     int count = 0;
     int i, j;
     int isDuplicate;
-
-    // Input string
     printf("Enter a string: ");
     fgets(str, sizeof(str), stdin);
-
-    // Remove trailing newline if present
     str[strcspn(str, "\n")] = '\0';
-
-    // Split string into words
     char *token = strtok(str, " ");
     while (token != NULL)
     {
@@ -388,15 +327,10 @@ int main()
         count++;
         token = strtok(NULL, " ");
     }
-
-    // Display unique words
     printf("\nString with unique words:\n");
-
     for (i = 0; i < count; i++)
     {
         isDuplicate = 0;
-
-        // Check if word appeared before
         for (j = 0; j < i; j++)
         {
             if (strcmp(words[i], words[j]) == 0)
@@ -405,20 +339,18 @@ int main()
                 break;
             }
         }
-
         if (!isDuplicate)
         {
             printf("%s ", words[i]);
         }
     }
-
     printf("\n");
-
     return 0;
 }
 
 # Output:
-Enter a string: That is not what is that is not 
+<img width="565" height="293" alt="image" src="https://github.com/user-attachments/assets/920c24ba-f77c-435c-9246-bea082b8f384" />
+
 
 String with unique words:
 That is not what that 
